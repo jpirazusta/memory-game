@@ -1,1 +1,7 @@
-Run in development mode with npm start
+Correr en modo desarrollo con npm start
+
+Entradas:
+<ul>
+    <li>Número</li>
+    <li>Tamaño de matriz</li>
+</ul>
