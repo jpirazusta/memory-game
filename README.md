@@ -1,4 +1,12 @@
-Correr en modo desarrollo con npm start
+Para correrlo:
+<ol>
+    <li><b>git clone https://github.com/jpirazusta/memory-game.git</b></li>
+    <li><b>npm install</b></li>
+    <li><b>npm start</b></li>
+</ol>
+Si ya lo tenés clonado, sustituir el primer paso por:
+<b>git pull origin master</b>
+para bajarte lo último.
 
 Entradas:
 <ul>
