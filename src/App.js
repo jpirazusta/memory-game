@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Start from './Components/Start';
+import Board from './Components/Board';
 import './App.css';
-import Start from './Start';
-import Board from './Board';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = {
       step: 0,
       finalNumber: "0",
-      numberOfPairs: "8"
+      numberOfPairs: "2"
     };
     this.totalSteps = 2;
   }

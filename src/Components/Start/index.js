@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Start.css';
-import logo from './assets/white_logo.png';
+import './styles.css';
+import logo from '../../assets/white_logo.png';
 
 function Start(props) {
   console.log("Start props:", props);

@@ -1,0 +1,11 @@
+.card {
+  background-color: rgba(15, 205, 171, 1);
+  padding: 10;
+  text-align: justify;
+  width: 160px;
+  height: 200px;
+}
+
+.card-logo {
+  width: 80px;
+}
