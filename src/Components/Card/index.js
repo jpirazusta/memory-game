@@ -14,7 +14,10 @@ function Card(props) {
     fontWeight: 400
   };
   return (
-    <div className="card" onClick={() => props.onChoose(props.key, props.pair)} >
+    <div className="card" style={{ backgroundColor: props.selected ? 'white' : 'rgba(15, 205, 171, 0.7)'}}
+      onClick={() => props.onChoose(props.id, props.pair)}
+      
+    >
       {props.selected ?
         <p style={style}>
           {props.content}
@@ -27,7 +30,7 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  key: PropTypes.number,
+  id: PropTypes.number,
   pair: PropTypes.number,
   pairChosen: PropTypes.bool,
   pairDiscovered: PropTypes.bool,

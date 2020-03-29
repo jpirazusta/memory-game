@@ -13,22 +13,30 @@ function Start(props) {
       </div>
       <div>
         <label>
-          Tamaño de tablero:
-            <div className="radio">
+          Nivel:
+          <div className="radio">
             <label>
-              <input type="radio" value="8" name="numberOfPairs"
-                checked={props.numberOfPairs === '8'}
+              <input type="radio" value="junior" name="level"
+                checked={props.level === 'junior'}
                 onChange={event => props.onConfigChange(event)} />
-                4x4
-              </label>
+              Junior - Imágenes. Tablero de 3x4.
+            </label>
           </div>
           <div className="radio">
             <label>
-              <input type="radio" value="18" name="numberOfPairs"
-                checked={props.numberOfPairs === '18'}
+              <input type="radio" value="semisenior" name="level"
+                checked={props.level === 'semisenior'}
                 onChange={event => props.onConfigChange(event)} />
-                6x6
-              </label>
+              Semisenior - Palabras y su definición. Tablero de 3x4.
+            </label>
+          </div>
+          <div className="radio">
+            <label>
+              <input type="radio" value="senior" name="level"
+                checked={props.level === 'senior'}
+                onChange={event => props.onConfigChange(event)} />
+              Senior - Palabras y su definición. Tablero de 4x4.
+            </label>
           </div>
         </label>
       </div>
@@ -46,7 +54,7 @@ function Start(props) {
 
 Start.propTypes = {
   finalNumber: PropTypes.string,
-  numberOfPairs: PropTypes.string,
+  level: PropTypes.string,
   onConfigChange: PropTypes.func,
   onIncrementStep: PropTypes.func
 }

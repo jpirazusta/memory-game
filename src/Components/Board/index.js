@@ -12,14 +12,14 @@ const json1 = [
   },
   {
     id: 1,
-    content: "Secuencia de pasos"
+    content: "Programar"
   }
 ];
 
 const json2 = [
   {
     id: 2,
-    content: "Programar"
+    content: "Secuencia de pasos"
   },
   {
     id: 3,
@@ -32,7 +32,8 @@ class Board extends React.Component {
     super(props);
     const pairs = [];
     const selected = [];
-    const numberOfPairs = parseInt(props.numberOfPairs);
+    //const numberOfPairs = this.state.level === 'junior' ? 6 : 8;
+    const numberOfPairs = 2;
     for (let index = 0; index < numberOfPairs; index++) {
       pairs.push({
         chosen: false,
@@ -45,41 +46,54 @@ class Board extends React.Component {
     }
     this.state = {
       pairs,
-      selected
+      selected,
+      cards: []
     };
   }
 
-  onChooseCard = (key, index) => {
-    
+  componentDidMount() {
+    const content1 = [];
+    const content2 = [];
+    const numberOfPairs = 2;
+    for (let index = 0; index < numberOfPairs; index++) {
+      content1.push({
+        id: json1[index].id,
+        pair: index,
+        content: json1[index].content,
+        isTitle: true
+      });
+      content2.push({
+        id: json2[index].id,
+        pair: index,
+        content: json2[index].content,
+        isTitle: false
+      });
+    }
+    const cards = content1.concat(content2);
+    shuffle(cards);
+    this.setState({ cards });
+  }
+
+  onChooseCard = (id, pair) => {
+    const selected = this.state.selected.slice();
+    selected[id] = true;
+    this.setState({ selected });
   }
 
   render() {
-    console.log("Board props:", this.props);
-    const cards1 = [];
-    const cards2 = [];
-    for (let index = 0; index < parseInt(this.props.numberOfPairs); index++) {
-      cards1.push(<Card
-        key={json1[index].id} pair={index}
-        pairChosen={this.state.pairs[index].chosen} pairDiscovered={this.state.pairs[index].discovered}
-        selected={this.state.selected[index]}
-        content={json1[index].content}
-        onChoose={(key, pair) => this.onChooseCard(key, pair)}
-        isTitle
-      />);
-      cards2.push(<Card
-        key={json2[index].id} pair={index}
-        pairChosen={this.state.pairs[index].chosen} pairDiscovered={this.state.pairs[index].discovered}
-        selected={this.state.selected[index]}
-        content={json2[index].content}
-        onChoose={(key, pair) => this.onChooseCard(key, pair)}
-        isTitle={false}
-      />);
-    }
-    const cards = cards1.concat(cards2);
-    shuffle(cards);
     return (
       <div className="board-container" >
-        {cards}
+        {this.state.cards.map(item => (
+          <Card
+            key={item.id} id={item.id} pair={item.pair}
+            pairChosen={this.state.pairs[item.pair].chosen}
+            pairDiscovered={this.state.pairs[item.pair].discovered}
+            selected={this.state.selected[item.id]}
+            content={item.content}
+            onChoose={(key, pair) => this.onChooseCard(key, pair)}
+            isTitle={item.isTitle}
+          />
+        ))}
         <button onClick={() => this.props.onIncrementStep()}>Volver</button>
       </div>
     );
@@ -88,7 +102,7 @@ class Board extends React.Component {
 
 Board.propTypes = {
   finalNumber: PropTypes.string,
-  numberOfPairs: PropTypes.string,
+  level: PropTypes.string,
   onIncrementStep: PropTypes.func
 }
 

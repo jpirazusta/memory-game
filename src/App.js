@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Start from './Components/Start';
-import Board from './Components/Board';
+import Start from './components/Start';
+import Board from './components/Board';
 import './App.css';
 
 class App extends React.Component {
@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = {
       step: 0,
       finalNumber: "0",
-      numberOfPairs: "2"
+      level: "junior"
     };
     this.totalSteps = 2;
   }
@@ -26,19 +26,19 @@ class App extends React.Component {
   }
 
   renderStep() {
-    const { finalNumber, numberOfPairs } = this.state;
+    const { finalNumber, level } = this.state;
     switch (this.state.step) {
       case 0:
         return <Start
           finalNumber={finalNumber}
-          numberOfPairs={numberOfPairs}
+          level={level}
           onConfigChange={this.onConfigChange}
           onIncrementStep={this.onIncrementStep}
         />;
       case 1:
         return <Board
           finalNumber={finalNumber}
-          numberOfPairs={numberOfPairs}
+          level={level}
           onIncrementStep={this.onIncrementStep}
         />;
       default:
