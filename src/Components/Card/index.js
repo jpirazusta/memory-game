@@ -6,9 +6,20 @@ import logo from '../../assets/white_logo.png';
 
 function Card(props) {
   console.log("Card props:", props);
+  const style = props.isTitle ? {
+    fontSize: 20,
+    fontWeight: 'bold'
+  } : {
+    fontSize: 16,
+    fontWeight: 400
+  };
   return (
     <div className="card" onClick={() => props.onChoose(props.key, props.pair)} >
-      {!props.selected &&
+      {props.selected ?
+        <p style={style}>
+          {props.content}
+        </p>
+      :
         <img className="card-logo" src={logo} alt="logo" />
       }
     </div>
@@ -23,6 +34,7 @@ Card.propTypes = {
   selected: PropTypes.bool,
   content: PropTypes.string,
   onChoose: PropTypes.func,
+  isTitle: PropTypes.bool
 }
 
 export default Card;

@@ -64,6 +64,7 @@ class Board extends React.Component {
         selected={this.state.selected[index]}
         content={json1[index].content}
         onChoose={(key, pair) => this.onChooseCard(key, pair)}
+        isTitle
       />);
       cards2.push(<Card
         key={json2[index].id} pair={index}
@@ -71,6 +72,7 @@ class Board extends React.Component {
         selected={this.state.selected[index]}
         content={json2[index].content}
         onChoose={(key, pair) => this.onChooseCard(key, pair)}
+        isTitle={false}
       />);
     }
     const cards = cards1.concat(cards2);
