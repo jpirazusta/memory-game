@@ -5,7 +5,6 @@ import './styles.css';
 import logo from '../../assets/white_logo.png';
 
 function Start(props) {
-  console.log("Start props:", props);
   return (
     <div className="start-container" >
       <div className="logo-container">
@@ -27,7 +26,7 @@ function Start(props) {
               <input type="radio" value="semisenior" name="level"
                 checked={props.level === 'semisenior'}
                 onChange={event => props.onConfigChange(event)} />
-              Semisenior - Palabras y su definición. Tablero de 3x4.
+              Semisenior - Palabras y su definición. Tablero de 3x6.
             </label>
           </div>
           <div className="radio">
@@ -35,7 +34,7 @@ function Start(props) {
               <input type="radio" value="senior" name="level"
                 checked={props.level === 'senior'}
                 onChange={event => props.onConfigChange(event)} />
-              Senior - Palabras y su definición. Tablero de 4x4.
+              Senior - Palabras y su definición. Tablero de 3x4.
             </label>
           </div>
         </label>

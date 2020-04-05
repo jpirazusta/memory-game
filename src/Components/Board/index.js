@@ -5,39 +5,16 @@ import Card from '../Card';
 import './styles.css';
 import shuffle from '../../helpers';
 
-const json1 = [
-  {
-    id: 0,
-    content: "Algoritmo"
-  },
-  {
-    id: 1,
-    content: "Programar"
-  }
-];
-
-const json2 = [
-  {
-    id: 2,
-    content: "Secuencia de pasos"
-  },
-  {
-    id: 3,
-    content: "Escribir en un lenguaje que la computadora entienda"
-  }
-];
-
 class Board extends React.Component {
   constructor(props) {
     super(props);
     const pairs = [];
     const selected = [];
-    //const numberOfPairs = this.state.level === 'junior' ? 6 : 8;
-    const numberOfPairs = 2;
+    const numberOfPairs = props.level === 'junior' || props.level === 'senior' ? 6 : 9;
     for (let index = 0; index < numberOfPairs; index++) {
       pairs.push({
         chosen: false,
-        discovered: false
+        discovered: false,
       });
       selected.push(false);
     };
@@ -47,36 +24,52 @@ class Board extends React.Component {
     this.state = {
       pairs,
       selected,
-      cards: []
+      cards: [],
     };
   }
 
   componentDidMount() {
-    const content1 = [];
-    const content2 = [];
-    const numberOfPairs = 2;
-    for (let index = 0; index < numberOfPairs; index++) {
-      content1.push({
-        id: json1[index].id,
-        pair: index,
-        content: json1[index].content,
-        isTitle: true
-      });
-      content2.push({
-        id: json2[index].id,
-        pair: index,
-        content: json2[index].content,
-        isTitle: false
-      });
+    let cards = [];
+    switch (this.props.level) {
+    case 'junior':
+      cards = require('../../data/junior.json');
+      break;
+    case 'semisenior':
+      cards = require('../../data/semisenior.json');
+      break;
+    case 'senior':
+      cards = require('../../data/senior.json');
+      break;
+    default:
+      cards = require('../../data/junior.json');
     }
-    const cards = content1.concat(content2);
     shuffle(cards);
     this.setState({ cards });
   }
 
+  isFirstCard() {
+    let isFirstCard = true;
+    let index = 0;
+    while (isFirstCard && index < this.state.selected.length) {
+      isFirstCard = isFirstCard && this.state.selected[index];
+      index++;
+    }
+    return isFirstCard;
+  }
+
   onChooseCard = (id, pair) => {
+    if (this.state.selected[id]) { return; }
     const selected = this.state.selected.slice();
     selected[id] = true;
+    if (!this.isFirstCard()) {
+      if (this.state.pairs[pair].chosen) {
+        // Acierto. Setear discovered.
+      } else {
+        // Fallo. Esperar 1 segundo y medio y dar vuelta y volver los chosen a false.
+      }
+    } else {
+      // Setear a chosen el pair.
+    }
     this.setState({ selected });
   }
 
@@ -89,9 +82,8 @@ class Board extends React.Component {
             pairChosen={this.state.pairs[item.pair].chosen}
             pairDiscovered={this.state.pairs[item.pair].discovered}
             selected={this.state.selected[item.id]}
-            content={item.content}
+            image={item.image}
             onChoose={(key, pair) => this.onChooseCard(key, pair)}
-            isTitle={item.isTitle}
           />
         ))}
         <button onClick={() => this.props.onIncrementStep()}>Volver</button>
@@ -103,7 +95,7 @@ class Board extends React.Component {
 Board.propTypes = {
   finalNumber: PropTypes.string,
   level: PropTypes.string,
-  onIncrementStep: PropTypes.func
+  onIncrementStep: PropTypes.func,
 }
 
 export default Board;

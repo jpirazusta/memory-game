@@ -9,8 +9,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       step: 0,
-      finalNumber: "0",
-      level: "junior"
+      finalNumber: '0',
+      level: 'junior',
     };
     this.totalSteps = 2;
   }
