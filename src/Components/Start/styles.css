@@ -1,15 +1,60 @@
 .start-container {
-    background-color: rgba(15, 205, 171, 1);
-    width: 300px;
-    border-radius: 20px;
-    color: white;
-    padding: 30px;
+  background-color: rgba(15, 205, 171, 1);
+  width: 400px;
+  border-radius: 20px;
+  color: white;
+  padding: 30px;
+  text-align: center;
 }
 
 .logo-container {
-    text-align: center;
+  text-align: center;
 }
 
 .logo {
-    width: 200px;
+  width: 200px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.level-button {
+  background-color: white;
+  color: rgba(15, 205, 171, 1);
+}
+
+.level-button-selected {
+  background-color: rgba(15, 205, 171, 1);
+  color: white;
+  border: 2px solid white;
+}
+
+.name-input {
+  border: none;
+  text-align: center;
+  color: rgba(15, 205, 171, 1);
+  font-family: 'Raleway-Bold';
+  padding: 5px;
+  font-size: 30px;
+  outline: 0;
+  margin: 30px 0;
+  border-radius: 6px;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.name-input::placeholder {
+  color: rgba(15, 205, 171, 1);
+  opacity: 1;
+  font-family: 'Raleway-Regular';
+}
+
+.play-button {
+  font-family: 'AxeHandel';
+  font-size: 27px;
+  width: 120px;
+  height: 35px;
+  border-radius: 6px;
 }

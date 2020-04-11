@@ -1,61 +1,55 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, func } from 'prop-types';
 
 import './styles.css';
-import logo from '../../assets/white_logo.png';
+import logo from '../../assets/images/white_logo.png';
+import { LEVELS } from '../../constants';
 
-function Start(props) {
+function Start({level, name, onConfigChange, onIncrementStep}) {
   return (
-    <div className="start-container" >
+    <div className="start-container">
       <div className="logo-container">
         <img className="logo" src={logo} alt="logo" />
       </div>
-      <div>
-        <label>
-          Nivel:
-          <div className="radio">
-            <label>
-              <input type="radio" value="junior" name="level"
-                checked={props.level === 'junior'}
-                onChange={event => props.onConfigChange(event)} />
-              Junior - Imágenes. Tablero de 3x4.
-            </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input type="radio" value="semisenior" name="level"
-                checked={props.level === 'semisenior'}
-                onChange={event => props.onConfigChange(event)} />
-              Semisenior - Palabras y su definición. Tablero de 3x6.
-            </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input type="radio" value="senior" name="level"
-                checked={props.level === 'senior'}
-                onChange={event => props.onConfigChange(event)} />
-              Senior - Palabras y su definición. Tablero de 3x4.
-            </label>
-          </div>
-        </label>
+      <p>Nivel</p>
+      <div className="buttons-container">
+        <button
+          className={level === LEVELS.junior ? 'level-button-selected' : 'level-button'}
+          onClick={() => onConfigChange({ name: 'level', value: LEVELS.junior })}>
+          JUNIOR
+        </button>
+        <button
+          className={level === LEVELS.semisenior ? 'level-button-selected' : 'level-button'}
+          onClick={() => onConfigChange({ name: 'level', value: LEVELS.semisenior })}>
+          SEMISENIOR
+        </button>
+        <button
+          className={level === LEVELS.senior ? 'level-button-selected' : 'level-button'}
+          onClick={() => onConfigChange({ name: 'level', value: LEVELS.senior })}>
+          SENIOR
+        </button>
       </div>
       <div>
         <label>
-          Número final (opcional):
-            <input type="number" value={props.finalNumber} name="finalNumber"
-            onChange={event => props.onConfigChange(event)} />
+          <input
+            className="name-input"
+            value={name}
+            name="name"
+            placeholder="TU NOMBRE"
+            onChange={event => onConfigChange(event.target)}
+          />
         </label>
       </div>
-      <button onClick={() => props.onIncrementStep()}>¡JUGAR!</button>
+      <button className="level-button play-button" onClick={() => onIncrementStep()}>¡JUGAR!</button>
     </div>
   );
 }
 
 Start.propTypes = {
-  finalNumber: PropTypes.string,
-  level: PropTypes.string,
-  onConfigChange: PropTypes.func,
-  onIncrementStep: PropTypes.func
+  name: string,
+  level: string,
+  onConfigChange: func,
+  onIncrementStep: func
 }
 
 export default Start;

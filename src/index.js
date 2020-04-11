@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
-import App from './App';
+import Main from './Components/Main';
+import './assets/fonts/AxeHandel.ttf'
+import './assets/fonts/Raleway-Bold.ttf'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Main />
   </React.StrictMode>,
   document.getElementById('root')
 );

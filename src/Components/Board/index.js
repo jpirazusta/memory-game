@@ -1,101 +1,113 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { string, func} from 'prop-types';
 
 import Card from '../Card';
 import './styles.css';
-import shuffle from '../../helpers';
+import { shuffle } from '../../helpers';
+import { SMALL_BOARD_PAIRS, LARGE_BOARD_PAIRS, LEVELS, TIME_TO_TURN_CARDS } from '../../constants';
 
-class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    const pairs = [];
-    const selected = [];
-    const numberOfPairs = props.level === 'junior' || props.level === 'senior' ? 6 : 9;
-    for (let index = 0; index < numberOfPairs; index++) {
-      pairs.push({
-        chosen: false,
-        discovered: false,
-      });
-      selected.push(false);
-    };
-    for (let index = numberOfPairs; index < numberOfPairs * 2; index++) {
-      selected.push(false);
-    }
-    this.state = {
-      pairs,
-      selected,
-      cards: [],
-    };
-  }
+function Board ({ finalNumber, level, onIncrementStep }) {
+  const initialPairs = [];
+  const numberOfPairs = level === LEVELS.junior || level === LEVELS.senior ? SMALL_BOARD_PAIRS : LARGE_BOARD_PAIRS;
+  for (let index = 0; index < numberOfPairs; index++) {
+    initialPairs.push({
+      chosen: false,
+      discovered: false,
+    });
+  };
+  const [pairs, setPairs] = useState(initialPairs);
+  const [selected, setSelected] = useState([]);
+  const [cards, setCards] = useState([]);
+  const [interactionEnabled, setInteractionEnabled] = useState(true);
 
-  componentDidMount() {
+  useEffect(() => {
     let cards = [];
-    switch (this.props.level) {
-    case 'junior':
-      cards = require('../../data/junior.json');
-      break;
-    case 'semisenior':
-      cards = require('../../data/semisenior.json');
-      break;
-    case 'senior':
-      cards = require('../../data/senior.json');
-      break;
-    default:
-      cards = require('../../data/junior.json');
+    const selected = [];
+    switch (level) {
+      case LEVELS.junior:
+        cards = require('../../data/junior.json');
+        break;
+      case LEVELS.semisenior:
+        cards = require('../../data/semisenior.json');
+        break;
+      case LEVELS.senior:
+        cards = require('../../data/senior.json');
+        break;
+      default:
+        break;
     }
+
     shuffle(cards);
-    this.setState({ cards });
-  }
 
-  isFirstCard() {
-    let isFirstCard = true;
-    let index = 0;
-    while (isFirstCard && index < this.state.selected.length) {
-      isFirstCard = isFirstCard && this.state.selected[index];
-      index++;
-    }
-    return isFirstCard;
-  }
+    cards.forEach(() => {
+      selected.push(false);
+    });
+    setCards(cards);
+    setSelected(selected);
+  }, [level]);
 
-  onChooseCard = (id, pair) => {
-    if (this.state.selected[id]) { return; }
-    const selected = this.state.selected.slice();
-    selected[id] = true;
-    if (!this.isFirstCard()) {
-      if (this.state.pairs[pair].chosen) {
-        // Acierto. Setear discovered.
-      } else {
-        // Fallo. Esperar 1 segundo y medio y dar vuelta y volver los chosen a false.
+  const onChooseCard = (cardIndex, pair) => {
+    function isFirstCard() {
+      let isFirstCard = true;
+      let index = 0;
+      while (isFirstCard && index < selected.length) {
+        let currentPair = cards[index].pair
+        isFirstCard = (isFirstCard && !selected[index]) || pairs[currentPair].discovered;
+        index++;
       }
-    } else {
-      // Setear a chosen el pair.
+      return isFirstCard;
     }
-    this.setState({ selected });
-  }
 
-  render() {
-    return (
-      <div className="board-container" >
-        {this.state.cards.map(item => (
-          <Card
-            key={item.id} id={item.id} pair={item.pair}
-            pairChosen={this.state.pairs[item.pair].chosen}
-            pairDiscovered={this.state.pairs[item.pair].discovered}
-            selected={this.state.selected[item.id]}
-            image={item.image}
-            onChoose={(key, pair) => this.onChooseCard(key, pair)}
-          />
-        ))}
-        <button onClick={() => this.props.onIncrementStep()}>Volver</button>
-      </div>
-    );
-  }
+    if (selected[cardIndex]) { return; }
+    const newSelected = selected.slice();
+    newSelected[cardIndex] = true;
+    const newPairs = pairs.slice();
+    if (isFirstCard()) {
+      newPairs[pair].chosen = true;
+    } else {
+      if (newPairs[pair].chosen) {
+        newPairs[pair].discovered = true;
+      } else {
+        setInteractionEnabled(false);
+        setTimeout(() => {
+          cards.forEach((card, index) => {
+            if (newSelected[index] && !pairs[card.pair].discovered) {
+              newSelected[index] = false;
+              newPairs[card.pair].chosen = false;
+            }
+          });
+          setSelected(newSelected);
+          setPairs(newPairs);
+          setInteractionEnabled(true);
+        }, TIME_TO_TURN_CARDS);
+      }
+    }
+    setSelected(newSelected);
+    setPairs(newPairs);
+  };
+
+  return (
+    <div className="board-container" >
+      {cards.map((item, index) => (
+        <Card
+          key={item.id}
+          index={index}
+          pair={item.pair}
+          selected={selected[index]}
+          image={item.image}
+          onChoose={(index, pair) => onChooseCard(index, pair)}
+          interactionEnabled={interactionEnabled}
+        />
+      ))}
+      <button onClick={() => onIncrementStep()}>Volver</button>
+    </div>
+  );
 }
 
 Board.propTypes = {
-  finalNumber: PropTypes.string,
-  level: PropTypes.string,
-  onIncrementStep: PropTypes.func,
+  finalNumber: string.isRequired,
+  level: string.isRequired,
+  onIncrementStep: func.isRequired,
 }
 
 export default Board;
