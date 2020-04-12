@@ -10,7 +10,7 @@ function Card({ index, pair, onChoose, selected, image, interactionEnabled }) {
   const handleClick = () => {
     if (interactionEnabled) {
       onChoose(index, pair);
-    };
+    }
   };
   return (
     <div className="card-container" onClick={handleClick}>
