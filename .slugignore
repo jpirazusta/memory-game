@@ -1,0 +1,5 @@
+/build
+/server
+/.git
+.gitignore
+*.md
