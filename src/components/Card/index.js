@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { number, bool, string, func } from 'prop-types';
 
 import './styles.css';
@@ -28,4 +28,4 @@ Card.propTypes = {
   interactionEnabled: bool.isRequired,
 };
 
-export default Card;
+export default memo(Card);

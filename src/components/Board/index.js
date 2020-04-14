@@ -1,50 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { string, func} from 'prop-types';
+import useBoard from '../../hooks/useBoard';
 
 import Card from '../Card';
 import './styles.css';
-import { shuffle } from '../../helpers';
-import { SMALL_BOARD_PAIRS, LARGE_BOARD_PAIRS, LEVELS, TIME_TO_TURN_CARDS } from '../../constants';
+import { TIME_TO_TURN_CARDS } from '../../constants';
 
-function Board ({ finalNumber, level, onIncrementStep }) {
-  const initialPairs = [];
-  const numberOfPairs = level === LEVELS.junior || level === LEVELS.senior ? SMALL_BOARD_PAIRS : LARGE_BOARD_PAIRS;
-  for (let index = 0; index < numberOfPairs; index++) {
-    initialPairs.push({
-      chosen: false,
-      discovered: false,
-    });
-  };
-  const [pairs, setPairs] = useState(initialPairs);
-  const [selected, setSelected] = useState([]);
-  const [cards, setCards] = useState([]);
-  const [interactionEnabled, setInteractionEnabled] = useState(true);
+function Board ({ name, level, onIncrementStep }) {
 
-  useEffect(() => {
-    let cards = [];
-    const selected = [];
-    switch (level) {
-      case LEVELS.junior:
-        cards = require('../../data/junior.json');
-        break;
-      case LEVELS.semisenior:
-        cards = require('../../data/semisenior.json');
-        break;
-      case LEVELS.senior:
-        cards = require('../../data/senior.json');
-        break;
-      default:
-        break;
-    }
-
-    shuffle(cards);
-
-    cards.forEach(() => {
-      selected.push(false);
-    });
-    setCards(cards);
-    setSelected(selected);
-  }, [level]);
+  const {
+    pairs,
+    setPairs,
+    selected,
+    setSelected,
+    cards,
+    interactionEnabled,
+    setInteractionEnabled
+  } = useBoard(level);
 
   const onChooseCard = (cardIndex, pair) => {
     function isFirstCard() {
@@ -87,7 +59,7 @@ function Board ({ finalNumber, level, onIncrementStep }) {
   };
 
   return (
-    <div className="board-container" >
+    <div className="board-container">
       {cards.map((item, index) => (
         <Card
           key={item.id}
@@ -105,7 +77,7 @@ function Board ({ finalNumber, level, onIncrementStep }) {
 }
 
 Board.propTypes = {
-  finalNumber: string.isRequired,
+  name: string.isRequired,
   level: string.isRequired,
   onIncrementStep: func.isRequired,
 }

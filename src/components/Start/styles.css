@@ -1,24 +1,24 @@
 .start-container {
   background-color: rgba(15, 205, 171, 1);
-  width: 400px;
+  width: 700px;
   border-radius: 20px;
   color: white;
   padding: 30px;
-  text-align: center;
   box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.23);
-}
-
-.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.logo {
-  width: 200px;
+.title {
+  margin: 0;
 }
 
 .buttons-container {
   display: flex;
   justify-content: space-between;
+  width: 500px;
 }
 
 /* .level-button {
@@ -50,12 +50,4 @@
   color: rgba(15, 205, 171, 1);
   opacity: 1;
   font-family: 'Raleway-Regular';
-}
-
-.play-button {
-  font-family: 'AxeHandel';
-  font-size: 27px;
-  width: 120px;
-  height: 35px;
-  border-radius: 6px;
 }

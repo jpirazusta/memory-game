@@ -20,6 +20,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  font-size: 60px;
+}
+
 p {
   font-size: 30px;
 }

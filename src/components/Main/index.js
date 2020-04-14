@@ -10,6 +10,7 @@ import {
   LEVEL_ACTION_TYPE,
   LEVELS,
 } from '../../constants';
+import logo from '../../assets/images/logo.png';
 
 const initialState = {
   step: 0,
@@ -60,6 +61,7 @@ function Main() {
   return (
     <div className="main-container">
       {renderStep()}
+      <img className="logo" src={logo} alt="logo" />
     </div>
   );
 }
