@@ -21,10 +21,10 @@
   justify-content: space-between;
 }
 
-.level-button {
+/* .level-button {
   background-color: white;
   color: rgba(15, 205, 171, 1);
-}
+} */
 
 .level-button-selected {
   background-color: rgba(15, 205, 171, 1);
