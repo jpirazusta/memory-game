@@ -1,12 +1,15 @@
-import React from 'react';
-import { string, func} from 'prop-types';
+import React, { useState } from 'react';
+import { string, number, func} from 'prop-types';
 import useBoard from '../../hooks/useBoard';
 
 import Card from '../Card';
-import './styles.css';
+import Modal from '../Modal';
 import { TIME_TO_TURN_CARDS } from '../../constants';
+import './styles.css';
 
-function Board ({ name, level, onIncrementStep }) {
+function Board ({ name, step, onIncrementStep, onReset }) {
+
+  const [matches, setMatches] = useState(0);
 
   const {
     pairs,
@@ -15,8 +18,9 @@ function Board ({ name, level, onIncrementStep }) {
     setSelected,
     cards,
     interactionEnabled,
-    setInteractionEnabled
-  } = useBoard(level);
+    setInteractionEnabled,
+    numberOfPairs,
+  } = useBoard(step);
 
   const onChooseCard = (cardIndex, pair) => {
     function isFirstCard() {
@@ -39,6 +43,7 @@ function Board ({ name, level, onIncrementStep }) {
     } else {
       if (newPairs[pair].chosen) {
         newPairs[pair].discovered = true;
+        setMatches(matches + 1);
       } else {
         setInteractionEnabled(false);
         setTimeout(() => {
@@ -59,27 +64,42 @@ function Board ({ name, level, onIncrementStep }) {
   };
 
   return (
-    <div className="board-container">
-      {cards.map((item, index) => (
-        <Card
-          key={item.id}
-          index={index}
-          pair={item.pair}
-          selected={selected[index]}
-          image={item.image}
-          onChoose={(index, pair) => onChooseCard(index, pair)}
-          interactionEnabled={interactionEnabled}
+    <>
+      <div className="board-container">
+        <div className="cards-container">
+          {cards.map((item, index) => (
+            <Card
+              key={item.id}
+              index={index}
+              pair={item.pair}
+              selected={selected[index]}
+              background={item.image}
+              onChoose={(index, pair) => onChooseCard(index, pair)}
+              interactionEnabled={interactionEnabled}
+              match={pairs[item.pair].discovered}
+            />
+          ))}
+        </div>
+        <div className="button-container">
+          <button className="green-button" onClick={() => onReset()}>VOLVER</button>
+        </div>
+      </div>
+      {matches === numberOfPairs && (
+        <Modal
+          name={name}
+          step={step}
+          onIncrementStep={onIncrementStep}
         />
-      ))}
-      <button onClick={() => onIncrementStep()}>Volver</button>
-    </div>
+      )}
+    </>
   );
 }
 
 Board.propTypes = {
   name: string.isRequired,
-  level: string.isRequired,
+  step: number.isRequired,
   onIncrementStep: func.isRequired,
+  onReset: func.isRequired,
 }
 
 export default Board;

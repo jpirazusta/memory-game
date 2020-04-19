@@ -7,61 +7,54 @@ import './styles.css';
 import {
   STEP_ACTION_TYPE,
   NAME_ACTION_TYPE,
-  LEVEL_ACTION_TYPE,
-  LEVELS,
+  RESET_ACTION_TYPE,
 } from '../../constants';
-import logo from '../../assets/images/logo.png';
 
 const initialState = {
   step: 0,
   name: '',
-  level: LEVELS.junior,
 };
 
 function Main() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function onConfigChange(input) {
-    switch (input.name) {
-      case 'level':
-        dispatch({ type: LEVEL_ACTION_TYPE, payload: input.value });
-        break;
-      case 'name':
-        dispatch({ type: NAME_ACTION_TYPE, payload: input.value });
-        break;
-      default:
-        break;
-    }
+  function onChangeName(value) {
+    dispatch({ type: NAME_ACTION_TYPE, payload: value });
   }
 
   const onIncrementStep = () => dispatch({ type: STEP_ACTION_TYPE });
 
+  const onReset = () => dispatch({ type: RESET_ACTION_TYPE });
+
   function renderStep() {
-    const { name, level, step } = state;
+    const { name, step } = state;
     switch (step) {
       case 0:
-        return <Start
-          name={name}
-          level={level}
-          onConfigChange={onConfigChange}
-          onIncrementStep={onIncrementStep}
-        />;
-      case 1:
-        return <Board
-          name={name}
-          level={level}
-          onIncrementStep={onIncrementStep}
-        />;
+        return (
+          <Start
+            name={name}
+            onChangeName={onChangeName}
+            onIncrementStep={onIncrementStep}
+          />
+        );
       default:
-        return null;
+        return (
+          <div className="main-container board">
+            <Board
+              name={name}
+              step={step}
+              onIncrementStep={onIncrementStep}
+              onReset={onReset}
+            />
+          </div>
+        );
     }
   }
 
   return (
     <div className="main-container">
       {renderStep()}
-      <img className="logo" src={logo} alt="logo" />
     </div>
   );
 }

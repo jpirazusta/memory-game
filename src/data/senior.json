@@ -2,61 +2,61 @@
   {
     "id": 0,
     "pair": 0,
-    "image": "Memory_Nivel1_1.png"
+    "image": "Memory_Nivel1_1"
   },
   {
     "id": 1,
     "pair": 1,
-    "image": "Memory_Nivel1_2.png"
+    "image": "Memory_Nivel1_2"
   },
   {
     "id": 2,
     "pair": 2,
-    "image": "Memory_Nivel1_3.png"
+    "image": "Memory_Nivel1_3"
   },
   {
     "id": 3,
     "pair": 3,
-    "image": "Memory_Nivel1_4.png"
+    "image": "Memory_Nivel1_4"
   },
   {
     "id": 4,
     "pair": 4,
-    "image": "Memory_Nivel3_5.png"
+    "image": "Memory_Nivel3_5"
   },
   {
     "id": 5,
     "pair": 5,
-    "image": "Memory_Nivel3_7.png"
+    "image": "Memory_Nivel3_7"
   },
   {
     "id": 6,
     "pair": 0,
-    "image": "Memory_Nivel3_1.png"
+    "image": "Memory_Nivel3_1"
   },
   {
     "id": 7,
     "pair": 1,
-    "image": "Memory_Nivel3_2.png"
+    "image": "Memory_Nivel3_2"
   },
   {
     "id": 8,
     "pair": 2,
-    "image": "Memory_Nivel3_3.png"
+    "image": "Memory_Nivel3_3"
   },
   {
     "id": 9,
     "pair": 3,
-    "image": "Memory_Nivel3_4.png"
+    "image": "Memory_Nivel3_4"
   },
   {
     "id": 10,
     "pair": 4,
-    "image": "Memory_Nivel3_6.png"
+    "image": "Memory_Nivel3_6"
   },
   {
     "id": 11,
     "pair": 5,
-    "image": "Memory_Nivel3_8.png"
+    "image": "Memory_Nivel3_8"
   }
 ]

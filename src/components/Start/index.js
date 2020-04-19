@@ -1,48 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { string, func } from 'prop-types';
 
+import logo from '../../assets/images/white_logo.png';
 import './styles.css';
-import { LEVELS } from '../../constants';
 
-function Start({level, name, onConfigChange, onIncrementStep}) {
+function Start({name, onChangeName, onIncrementStep}) {
+  const [error, setError] = useState(false);
+
+  function onClickPlay() {
+    if (name === '') {
+      setError(true);
+      return;
+    }
+    onIncrementStep();
+  };
+
   return (
     <>
       <div className="start-container">
-        {/* <div className="logo-container">
-          <img className="logo" src={logo} alt="logo" />
-        </div> */}
+        <img className="logo" src={logo} alt="logo" />
         <h1 className="title">MEMORY TECNOLÓGICO</h1>
         <p>Desde Escuela Falco queremos desafiar tu memoria.<br />¿Aceptás el reto?</p>
-        <p>Nivel</p>
-        <div className="buttons-container">
-          <button
-            className={level === LEVELS.junior ? 'level-button-selected' : 'level-button'}
-            onClick={() => onConfigChange({ name: 'level', value: LEVELS.junior })}>
-            JUNIOR
-          </button>
-          <button
-            className={level === LEVELS.semisenior ? 'level-button-selected' : 'level-button'}
-            onClick={() => onConfigChange({ name: 'level', value: LEVELS.semisenior })}>
-            SEMISENIOR
-          </button>
-          <button
-            className={level === LEVELS.senior ? 'level-button-selected' : 'level-button'}
-            onClick={() => onConfigChange({ name: 'level', value: LEVELS.senior })}>
-            SENIOR
-          </button>
-        </div>
         <div>
           <label>
             <input
               className="name-input"
               value={name}
               name="name"
-              placeholder="TU NOMBRE"
-              onChange={event => onConfigChange(event.target)}
+              placeholder="Ingresá tu nombre aquí"
+              onChange={event => onChangeName(event.target.value)}
             />
           </label>
         </div>
-        <button className="level-button play-button" onClick={() => onIncrementStep()}>¡JUGAR!</button>
+        <div className="error">
+          {error && '¡No olvides ingresar tu nombre!'}
+        </div>
+        <button className="play-button" onClick={() => onClickPlay()}>¡JUGAR!</button>
       </div>
     </>
   );
@@ -50,8 +43,7 @@ function Start({level, name, onConfigChange, onIncrementStep}) {
 
 Start.propTypes = {
   name: string,
-  level: string,
-  onConfigChange: func,
+  onChangeName: func,
   onIncrementStep: func
 }
 

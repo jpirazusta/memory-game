@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import { shuffle } from '../helpers';
-import { SMALL_BOARD_PAIRS, LARGE_BOARD_PAIRS, LEVELS } from '../constants';
+import { SMALL_BOARD_PAIRS, LARGE_BOARD_PAIRS } from '../constants';
 
-const useBoard = level => {
+const useBoard = step => {
   const [pairs, setPairs] = useState([]);
   const [selected, setSelected] = useState([]);
   const [cards, setCards] = useState([]);
   const [interactionEnabled, setInteractionEnabled] = useState(true);
+  const numberOfPairs = step === 2 ? LARGE_BOARD_PAIRS : SMALL_BOARD_PAIRS;
 
   useEffect(() => {
     let cards = [];
     const selected = [];
-    switch (level) {
-      case LEVELS.junior:
+    switch (step) {
+      case 1:
         cards = require('../data/junior.json');
         break;
-      case LEVELS.semisenior:
+      case 2:
         cards = require('../data/semisenior.json');
         break;
-      case LEVELS.senior:
+      case 3:
         cards = require('../data/senior.json');
         break;
       default:
@@ -28,7 +29,6 @@ const useBoard = level => {
     shuffle(cards);
 
     const initialPairs = [];
-    const numberOfPairs = level === LEVELS.junior || level === LEVELS.senior ? SMALL_BOARD_PAIRS : LARGE_BOARD_PAIRS;
     for (let index = 0; index < numberOfPairs; index++) {
       initialPairs.push({
         chosen: false,
@@ -42,7 +42,7 @@ const useBoard = level => {
     setPairs(initialPairs);
     setCards(cards);
     setSelected(selected);
-  }, [level]);
+  }, [step, numberOfPairs]);
 
   return {
     pairs,
@@ -51,7 +51,8 @@ const useBoard = level => {
     setSelected,
     cards,
     interactionEnabled,
-    setInteractionEnabled
+    setInteractionEnabled,
+    numberOfPairs,
   };
 };
 

@@ -1,31 +1,37 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { number, bool, string, func } from 'prop-types';
 
-import './styles.css';
 import cardBackgroundReverse from '../../assets/images/cardBackground.png';
-import { getImageByName } from '../../helpers';
+import { image } from '../../helpers';
+import useMatch from '../../hooks/useMatch';
+import './styles.css';
 
-function Card({ index, pair, onChoose, selected, image, interactionEnabled }) {
-  const cardBackground = getImageByName(image);
+function Card({ index, pair, onChoose, selected, background, interactionEnabled, match }) {
+  const discovered = useMatch(match);
+  const cardBackground = image[background];
   const handleClick = () => {
-    if (interactionEnabled) {
-      onChoose(index, pair);
-    }
+    if (interactionEnabled)  onChoose(index, pair);
   };
-  return (
-    <div className="card-container" onClick={handleClick}>
-      <img className="card" src={selected ? cardBackground: cardBackgroundReverse} alt="Card" />
-    </div>
-  );
+  // if (discovered) return <div className="card-container" />; else {
+    return (
+      <div className="card-container" onClick={handleClick}>
+        <div className={'card' + (!selected ? ' flip' : '')}>
+          <img className="front" src={cardBackground} alt="Card" />
+          <img className="back" src={cardBackgroundReverse} alt="Card" />
+        </div>
+      </div>
+    );
+  // }
 };
 
 Card.propTypes = {
   index: number.isRequired,
   pair: number.isRequired,
   selected: bool.isRequired,
-  image: string.isRequired,
+  background: string.isRequired,
   onChoose: func.isRequired,
   interactionEnabled: bool.isRequired,
+  match: bool.isRequired,
 };
 
-export default memo(Card);
+export default Card;

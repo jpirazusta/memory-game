@@ -1,6 +1,6 @@
 .start-container {
   background-color: rgba(15, 205, 171, 1);
-  width: 700px;
+  width: 1080px;
   border-radius: 20px;
   color: white;
   padding: 30px;
@@ -11,43 +11,40 @@
   text-align: center;
 }
 
-.title {
-  margin: 0;
-}
-
-.buttons-container {
-  display: flex;
-  justify-content: space-between;
-  width: 500px;
-}
-
-/* .level-button {
-  background-color: white;
-  color: rgba(15, 205, 171, 1);
-} */
-
-.level-button-selected {
-  background-color: rgba(15, 205, 171, 1);
-  color: white;
-  border: 2px solid white;
-}
-
 .name-input {
   border: none;
   text-align: center;
   color: rgba(15, 205, 171, 1);
   font-family: 'Raleway-Bold';
   padding: 5px;
-  font-size: 30px;
+  font-size: 20px;
   outline: 0;
-  margin: 30px 0;
-  border-radius: 6px;
+  margin-top: 30px;
+  border-radius: 25px;
   width: 100%;
+  height: 40px;
   text-transform: uppercase;
+  box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.23);
 }
 
 .name-input::placeholder {
-  color: rgba(15, 205, 171, 1);
+  color: #cdc7c7;
   opacity: 1;
   font-family: 'Raleway-Regular';
+  text-transform: none;
+}
+
+.play-button {
+  margin-top: 40px 0;
+  font-size: 20px;
+}
+
+.logo {
+  width: 243px;
+}
+
+.error {
+  height: 30px;
+  display: flex;
+  align-items: center;
 }

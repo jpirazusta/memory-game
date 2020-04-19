@@ -4,8 +4,8 @@
 }
 
 @font-face {
-  font-family: 'Raleway-Bold';
-  src: local('Raleway-Bold'), url(./assets/fonts/Raleway-Bold.ttf) format('truetype');
+  font-family: 'Raleway-Black';
+  src: local('Raleway-Black'), url(./assets/fonts/Raleway-Black.ttf) format('truetype');
 }
 
 @font-face {
@@ -21,15 +21,18 @@ body {
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 75px;
+  margin: 25px 0;
 }
 
 p {
-  font-size: 30px;
+  font-family: 'Raleway-Regular';
+  font-size: 25px;
+  margin: 0;
 }
 
 button {
-  font-family: 'Raleway-Bold';
+  font-family: 'Raleway-Black';
   width: 127px;
   height: 40px;
   border-radius: 20px;
@@ -49,4 +52,15 @@ button:hover {
 
 button:focus {
   outline: 0;
+}
+
+.green-button {
+  background-color: rgba(15, 205, 171, 1);
+  color: white;
+}
+
+.green-button:hover {
+  background-color: white;
+  color: rgba(15, 205, 171, 1);
+  border: 2px solid rgba(15, 205, 171, 1);
 }
