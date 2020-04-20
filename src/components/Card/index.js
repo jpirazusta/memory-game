@@ -6,13 +6,23 @@ import { image } from '../../helpers';
 import useMatch from '../../hooks/useMatch';
 import './styles.css';
 
-function Card({ index, pair, onChoose, selected, background, interactionEnabled, match }) {
-  const discovered = useMatch(match);
+function Card({
+  index,
+  pair,
+  onChoose,
+  selected,
+  background,
+  interactionEnabled,
+  match,
+  levelPassed,
+  setButtonDisabled,
+}) {
+  const discovered = useMatch(match, levelPassed, setButtonDisabled);
   const cardBackground = image[background];
   const handleClick = () => {
     if (interactionEnabled)  onChoose(index, pair);
   };
-  // if (discovered) return <div className="card-container" />; else {
+  if (discovered) return <div className="card-container" />; else {
     return (
       <div className="card-container" onClick={handleClick}>
         <div className={'card' + (!selected ? ' flip' : '')}>
@@ -21,7 +31,7 @@ function Card({ index, pair, onChoose, selected, background, interactionEnabled,
         </div>
       </div>
     );
-  // }
+  }
 };
 
 Card.propTypes = {
@@ -32,6 +42,8 @@ Card.propTypes = {
   onChoose: func.isRequired,
   interactionEnabled: bool.isRequired,
   match: bool.isRequired,
+  levelPassed: bool.isRequired,
+  setButtonDisabled: func.isRequired,
 };
 
 export default Card;

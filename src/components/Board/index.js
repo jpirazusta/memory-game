@@ -5,7 +5,10 @@ import useBoard from '../../hooks/useBoard';
 import Card from '../Card';
 import Modal from '../Modal';
 import { TIME_TO_TURN_CARDS } from '../../constants';
+import matchAudio from '../../assets/sounds/match.mp3';
 import './styles.css';
+
+const match = new Audio(matchAudio);
 
 function Board ({ name, step, onIncrementStep, onReset }) {
 
@@ -20,7 +23,9 @@ function Board ({ name, step, onIncrementStep, onReset }) {
     interactionEnabled,
     setInteractionEnabled,
     numberOfPairs,
-  } = useBoard(step);
+    buttonDisabled,
+    setButtonDisabled,
+  } = useBoard(step, setMatches);
 
   const onChooseCard = (cardIndex, pair) => {
     function isFirstCard() {
@@ -43,6 +48,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
     } else {
       if (newPairs[pair].chosen) {
         newPairs[pair].discovered = true;
+        if (!levelPassed) { match.play(); }
         setMatches(matches + 1);
       } else {
         setInteractionEnabled(false);
@@ -63,6 +69,8 @@ function Board ({ name, step, onIncrementStep, onReset }) {
     setPairs(newPairs);
   };
 
+  const levelPassed = matches === numberOfPairs;
+
   return (
     <>
       <div className="board-container">
@@ -77,6 +85,8 @@ function Board ({ name, step, onIncrementStep, onReset }) {
               onChoose={(index, pair) => onChooseCard(index, pair)}
               interactionEnabled={interactionEnabled}
               match={pairs[item.pair].discovered}
+              levelPassed={levelPassed}
+              setButtonDisabled={setButtonDisabled}
             />
           ))}
         </div>
@@ -84,22 +94,23 @@ function Board ({ name, step, onIncrementStep, onReset }) {
           <button className="green-button" onClick={() => onReset()}>VOLVER</button>
         </div>
       </div>
-      {matches === numberOfPairs && (
+      {levelPassed && (
         <Modal
           name={name}
           step={step}
           onIncrementStep={onIncrementStep}
+          buttonDisabled={buttonDisabled}
         />
       )}
     </>
   );
-}
+};
 
 Board.propTypes = {
   name: string.isRequired,
   step: number.isRequired,
   onIncrementStep: func.isRequired,
   onReset: func.isRequired,
-}
+};
 
 export default Board;

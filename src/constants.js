@@ -1,5 +1,5 @@
 export const TOTAL_STEPS = 4;
-export const TIME_TO_TURN_CARDS = 1500;
+export const TIME_TO_TURN_CARDS = 1000;
 export const NAME_ACTION_TYPE = 'SET_NAME';
 export const STEP_ACTION_TYPE = 'INCREMENT_STEP';
 export const RESET_ACTION_TYPE = 'RESET';

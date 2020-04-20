@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { shuffle } from '../helpers';
 import { SMALL_BOARD_PAIRS, LARGE_BOARD_PAIRS } from '../constants';
 
-const useBoard = step => {
+const useBoard = (step, setMatches) => {
   const [pairs, setPairs] = useState([]);
   const [selected, setSelected] = useState([]);
   const [cards, setCards] = useState([]);
   const [interactionEnabled, setInteractionEnabled] = useState(true);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const numberOfPairs = step === 2 ? LARGE_BOARD_PAIRS : SMALL_BOARD_PAIRS;
 
   useEffect(() => {
@@ -42,7 +43,9 @@ const useBoard = step => {
     setPairs(initialPairs);
     setCards(cards);
     setSelected(selected);
-  }, [step, numberOfPairs]);
+    setButtonDisabled(true);
+    setMatches(0);
+  }, [step, numberOfPairs, setMatches]);
 
   return {
     pairs,
@@ -53,6 +56,8 @@ const useBoard = step => {
     interactionEnabled,
     setInteractionEnabled,
     numberOfPairs,
+    buttonDisabled,
+    setButtonDisabled,
   };
 };
 
