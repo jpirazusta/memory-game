@@ -32,11 +32,13 @@ function Main() {
     switch (step) {
       case 0:
         return (
-          <Start
-            name={name}
-            onChangeName={onChangeName}
-            onIncrementStep={onIncrementStep}
-          />
+          <div className="main-container">
+            <Start
+              name={name}
+              onChangeName={onChangeName}
+              onIncrementStep={onIncrementStep}
+            />
+          </div>
         );
       default:
         return (
@@ -51,12 +53,7 @@ function Main() {
         );
     }
   }
-
-  return (
-    <div className="main-container">
-      {renderStep()}
-    </div>
-  );
+  return renderStep();
 }
 
 export default Main;
