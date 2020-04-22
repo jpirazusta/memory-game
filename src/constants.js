@@ -6,7 +6,7 @@ export const RESET_ACTION_TYPE = 'RESET';
 export const SMALL_BOARD_PAIRS = 6;
 export const LARGE_BOARD_PAIRS = 9;
 export const LEVELS = {
-  junior: 'JUNIOR',
-  semisenior: 'SEMISENIOR',
-  senior: 'SENIOR',
+  1: 'JUNIOR',
+  2: 'SEMISENIOR',
+  3: 'SENIOR',
 };

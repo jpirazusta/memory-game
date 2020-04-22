@@ -4,7 +4,7 @@ import useBoard from '../../hooks/useBoard';
 
 import Card from '../Card';
 import Modal from '../Modal';
-import { TIME_TO_TURN_CARDS } from '../../constants';
+import { TIME_TO_TURN_CARDS, LEVELS } from '../../constants';
 import matchAudio from '../../assets/sounds/match.mp3';
 import './styles.css';
 
@@ -74,6 +74,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
   return (
     <>
       <div className="board-container">
+        <span className="level">Nivel: {LEVELS[step]}</span>
         <div className="cards-container">
           {cards.map((item, index) => (
             <Card
