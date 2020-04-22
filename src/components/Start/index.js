@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { string, func } from 'prop-types';
 
 import logo from '../../assets/images/white_logo.png';
+import strings from '../../strings';
 import './styles.css';
 
 function Start({name, onChangeName, onIncrementStep}) {
@@ -19,23 +20,23 @@ function Start({name, onChangeName, onIncrementStep}) {
     <>
       <div className="start-container">
         <img className="logo" src={logo} alt="logo" />
-        <h1 className="title">MEMORY TECNOLÓGICO</h1>
-        <p>Desde Escuela Falco queremos desafiar tu memoria.<br />¿Aceptás el reto?</p>
+        <h1 className="title">{strings.title}</h1>
+        <p>{strings.descriptionLine1}<br />{strings.descriptionLine2}</p>
         <div>
           <label>
             <input
               className="name-input"
               value={name}
               name="name"
-              placeholder="Ingresá tu nombre aquí"
+              placeholder={strings.namePlaceholder}
               onChange={event => onChangeName(event.target.value)}
             />
           </label>
         </div>
         <div className="error">
-          {error && '¡No olvides ingresar tu nombre!'}
+          {error && strings.nameError}
         </div>
-        <button className="play-button" onClick={() => onClickPlay()}>¡JUGAR!</button>
+        <button className="play-button" onClick={() => onClickPlay()}>{strings.playButton}</button>
       </div>
     </>
   );

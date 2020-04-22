@@ -20,7 +20,7 @@ function Main() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function onChangeName(value) {
-    dispatch({ type: NAME_ACTION_TYPE, payload: value });
+    dispatch({ type: NAME_ACTION_TYPE, payload: value.toUpperCase() });
   }
 
   const onIncrementStep = () => dispatch({ type: STEP_ACTION_TYPE });

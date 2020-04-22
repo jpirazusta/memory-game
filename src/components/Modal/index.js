@@ -12,21 +12,21 @@ const Modal = ({ name, step, onIncrementStep, buttonDisabled }) => {
 
   const renderText = () => {
     if (step === 3) {
-      return <p>{strings.winSenior}</p>
+      return <p className="modal-description">{strings.winSenior}</p>
     }
-    return <p>{step === 1 ? strings.winJunior : strings.winSemisenior}</p>;
+    return <p className="modal-description">{step === 1 ? strings.winJunior : strings.winSemisenior}</p>;
   }
 
   return (
     <div className="opacity-layer">
       <div className="win-modal">
-        ¡FELICITACIONES, {name}!
+        <span className="modal-title">¡{strings.modalTitle}{name}!</span>
         {renderText()}
         <button
           className={'green-button' + (buttonDisabled ? ' disabled' : '')}
           onClick={() => onIncrementStep()}
           disabled={buttonDisabled}>
-          ¡JUGAR!
+          {step !== 3 ? strings.playButton : strings.backButton}
         </button>
       </div>
     </div>

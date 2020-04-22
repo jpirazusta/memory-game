@@ -4,6 +4,7 @@ import useBoard from '../../hooks/useBoard';
 
 import Card from '../Card';
 import Modal from '../Modal';
+import strings from '../../strings';
 import { TIME_TO_TURN_CARDS, LEVELS } from '../../constants';
 import matchAudio from '../../assets/sounds/match.mp3';
 import './styles.css';
@@ -48,7 +49,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
     } else {
       if (newPairs[pair].chosen) {
         newPairs[pair].discovered = true;
-        if (!levelPassed) { match.play(); }
+        if (matches !== numberOfPairs - 1) match.play();
         setMatches(matches + 1);
       } else {
         setInteractionEnabled(false);
@@ -74,7 +75,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
   return (
     <>
       <div className="board-container">
-        <span className="level">Nivel: {LEVELS[step]}</span>
+        <span className="level">{strings.levelLabel} {LEVELS[step]}</span>
         <div className="cards-container">
           {cards.map((item, index) => (
             <Card
@@ -92,7 +93,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
           ))}
         </div>
         <div className="button-container">
-          <button className="green-button" onClick={() => onReset()}>VOLVER</button>
+          <button className="green-button" onClick={() => onReset()}>{strings.backButton}</button>
         </div>
       </div>
       {levelPassed && (
@@ -102,7 +103,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
           onIncrementStep={onIncrementStep}
           buttonDisabled={buttonDisabled}
         />
-      )}
+     )}
     </>
   );
 };

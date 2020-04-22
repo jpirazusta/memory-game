@@ -11,7 +11,7 @@
 }
 
 .win-modal {
-  width: 440px;
+  width: 480px;
   background-color: white;
   border-radius: 10px;
   padding: 20px;
@@ -19,6 +19,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.23);
+}
+
+.modal-title {
+  font-size: 35px;
+  color: rgba(15, 205, 171, 1);
+}
+
+.modal-description {
+  font-size: 20px;
+  margin: 15px 0;
 }
 
 .disabled {
