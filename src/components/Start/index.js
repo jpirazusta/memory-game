@@ -19,20 +19,19 @@ function Start({name, onChangeName, onIncrementStep}) {
   return (
     <>
       <div className="start-container">
-        <img className="logo" src={logo} alt="logo" />
+        <a href="https://www.escuelafalco.com/" target="_blank" rel="noopener noreferrer">
+          <img className="logo" src={logo} alt="logo" />
+        </a>
         <h1 className="title">{strings.title}</h1>
         <p>{strings.descriptionLine1}<br />{strings.descriptionLine2}</p>
-        <div>
-          <label>
-            <input
-              className="name-input"
-              value={name}
-              name="name"
-              placeholder={strings.namePlaceholder}
-              onChange={event => onChangeName(event.target.value)}
-            />
-          </label>
-        </div>
+        <input
+          className="name-input"
+          value={name}
+          name="name"
+          placeholder={strings.namePlaceholder}
+          onChange={event => onChangeName(event.target.value)}
+          autocomplete="off"
+        />
         <div className="error">
           {error && strings.nameError}
         </div>

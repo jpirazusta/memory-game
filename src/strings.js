@@ -8,9 +8,9 @@ const strings = {
   levelLabel: 'Nivel: ',
   backButton: 'VOLVER',
   modalTitle: 'FELICITACIONES, ',
-  winJunior: 'Pasaste el nivel Junior. ¡Probá el nivel Semisenior!',
-  winSemisenior: 'Pasaste el nivel Semisenior. ¡Probá el nivel Senior!',
-  winSenior: '¡Completaste todos los niveles!',
+  modalMessage: 'Has completado el nivel ',
+  nextLevelButton: 'SIGUIENTE NIVEL',
+  resourcesButton: 'VER MÁS RECURSOS',
 };
 
 export default strings;
