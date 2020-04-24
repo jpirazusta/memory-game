@@ -28,6 +28,7 @@ function Start({name, onChangeName, onIncrementStep}) {
           className="name-input"
           value={name}
           name="name"
+          maxlength="15"
           placeholder={strings.namePlaceholder}
           onChange={event => onChangeName(event.target.value)}
           autocomplete="off"

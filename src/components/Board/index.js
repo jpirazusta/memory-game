@@ -103,7 +103,7 @@ function Board ({ name, step, onIncrementStep, onReset }) {
           onIncrementStep={onIncrementStep}
           buttonDisabled={buttonDisabled}
         />
-     )}
+      )}
     </>
   );
 };
