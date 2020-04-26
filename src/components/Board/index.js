@@ -6,6 +6,7 @@ import Card from '../Card';
 import Modal from '../Modal';
 import strings from '../../strings';
 import { TIME_TO_TURN_CARDS, LEVELS } from '../../constants';
+import backArrow from '../../assets/images/backArrow.png';
 import matchAudio from '../../assets/sounds/match.mp3';
 import './styles.css';
 
@@ -95,6 +96,9 @@ function Board ({ name, step, onIncrementStep, onReset }) {
         <div className="button-container">
           <button className="green-button" onClick={() => onReset()}>{strings.backButton}</button>
         </div>
+      </div>
+      <div className="back-button" onClick={() => onReset()}>
+          <img className="back-image" src={backArrow} alt="Back" />
       </div>
       {levelPassed && (
         <Modal
