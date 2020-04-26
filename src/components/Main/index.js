@@ -53,7 +53,14 @@ function Main() {
         );
     }
   }
-  return renderStep();
+  return (
+    <>
+      {renderStep()}
+      <div className="portrait-container">
+        <p className="portrait-message">ROTÁ EL DISPOSITIVO PARA JUGAR</p>
+      </div>
+    </>
+  );
 }
 
 export default Main;

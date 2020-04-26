@@ -24,3 +24,7 @@
   font-size: 25px;
   color: rgba(15, 205, 171, 1);
 }
+
+.back-button {
+  display: none;
+}

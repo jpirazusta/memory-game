@@ -65,3 +65,109 @@ button:focus {
   color: rgba(15, 205, 171, 1);
   border: 2px solid rgba(15, 205, 171, 1);
 }
+
+
+@media (orientation: portrait) {
+  body {
+    background-color: rgba(15, 205, 171, 1);
+  }
+
+  .main-container {
+    display: none;
+  }
+
+  .portrait-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(15, 205, 171, 1);
+    padding: 30px;
+    width: 100vw;
+  }
+
+  .portrait-message {
+    color: white;
+    font-family: 'AxeHandel';
+    font-size: 40px;
+    text-align: center;
+  }
+}
+
+@media (orientation: landscape) {
+  .portrait-container {
+    display: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  p {
+    font-size: 20px;
+  }
+
+  .board-container {
+    width: 85%;
+    padding: 2% 2% 0.8% 2%;
+    border-radius: 14px;
+  }
+
+  .level {
+    display: none;
+  }
+
+  .button-container {
+    display: none;
+  }
+
+  .back-button {
+    display: block;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .back-image {
+    position: absolute;
+    width: 18px;
+    left: 4px;
+  }
+
+  .images-container {
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  .level-image-container {
+    width: 60px;
+    height: 60px;
+  }
+
+  .bigger {
+    width: 80px;
+    height: 80px;
+  }
+
+  .level-number {
+    font-size: 34px;
+  }
+
+  .bigger .level-number {
+    font-size: 48px;
+  }
+
+  .modal-description {
+    margin: 15px 0;
+  }
+
+  .card-container {
+    width: 15.5%;
+    margin-bottom: 10px;
+  }
+}
