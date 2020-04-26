@@ -48,31 +48,3 @@
   display: flex;
   align-items: center;
 }
-
-@media (max-width: 1080px) {
-  .start-container {
-    width: 80%;
-    padding: 20px;
-  }
-
-  .logo {
-    width: 120px;
-  }
-
-  .title {
-    font-size: 40px;
-    margin: 10px 0;
-  }
-
-  .name-input {
-    font-size: 18px;
-    height: 30px;
-    width: 240px;
-    margin-top: 15px;
-  }
-
-  .error {
-    height: 15px;
-    padding: 5px;
-  }
-}

@@ -28,10 +28,10 @@ function Start({name, onChangeName, onIncrementStep}) {
           className="name-input"
           value={name}
           name="name"
-          maxlength="15"
+          maxLength="15"
           placeholder={strings.namePlaceholder}
           onChange={event => onChangeName(event.target.value)}
-          autocomplete="off"
+          autoComplete="off"
         />
         <div className="error">
           {error && strings.nameError}
